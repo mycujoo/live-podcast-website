@@ -18,6 +18,11 @@ const Button = styled.button`
         background: #fdcc52;
         border-color: #fdcc52;
     }
+
+    ${props => props.disabled && `
+        opacity: .3;
+        pointer-events: none;
+    `}
 `
 
 export default Button

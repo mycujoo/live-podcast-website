@@ -12,6 +12,10 @@ const Input = styled.input`
         font-size: 50px;
         padding: 20px;
     `}
+
+    ${props => props.disabled && `
+        background: #ddd;
+    `}
 `
 
 export default Input

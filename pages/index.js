@@ -9,14 +9,41 @@ import {
 import Button from '../components/Button'
 import Input from '../components/Input'
 import H1 from '../components/H1'
-import Body from '../components/Body'
 import Brand from '../components/Brand'
 import Page from '../components/Page'
 
 class Index extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            roomName: ''
+        }
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            roomName: e.target.value
+        })
+    }
+
+    handleStartRecording = (e) => {
+        const { dispatch } = this.props
+        const { roomName } = this.state
+
+        dispatch(startRecording(roomName))
+    }
+
+    handleStopRecording = (e) => {
+        const { dispatch } = this.props
+
+        dispatch(stopRecording())
+    }
 
     render() {
-        const { dispatch } = this.props
+        const {
+            isRecording,
+        } = this.props
 
         return <Page title="Live Podcast">
             <div className="root">
@@ -29,11 +56,28 @@ class Index extends React.Component {
                         <H1>Create your podcast</H1>
 
                         <div className="create-room">
-                            <Input big ref={(input) => this.input = input} placeholder="e.g. React Amsterdam" type="text" name="room" />
+                            <Input
+                                big={true}
+                                value={this.state.roomName}
+                                onChange={this.handleChange}
+                                placeholder="e.g. React Amsterdam"
+                                type="text"
+                                name="room"
+                                disabled={isRecording}
+                            />
 
-                            { this.props.isRecording
-                                ? <Button onClick={() => dispatch(stopRecording())}>Stop ({this.props.roomName})</Button>
-                                : <Button onClick={() => dispatch(startRecording(this.input.value))}>Start</Button>
+                            { isRecording
+                                ?
+                                <Button
+                                    onClick={this.handleStopRecording}>
+                                    Stop
+                                </Button>
+                                :
+                                <Button
+                                    disabled={!this.state.roomName}
+                                    onClick={this.handleStartRecording}>
+                                    Start
+                                </Button>
                             }
 
                         </div>
