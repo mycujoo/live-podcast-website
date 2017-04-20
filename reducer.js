@@ -1,6 +1,7 @@
 const defaultState = {
     roomName: '',
-    isRecording: false
+    isRecording: false,
+    isListening: false,
 }
 
 const reducer = (state = defaultState, action) => {
@@ -18,10 +19,23 @@ const reducer = (state = defaultState, action) => {
                 isRecording: false
             }
 
+        case 'START_LISTENING':
+            return {
+                ...state,
+                isListening: true,
+                roomName: action.payload.roomName
+            }
+
+        case 'STOP_LISTENING':
+            return {
+                ...state,
+                isListening: false
+            }
+
         case 'CHANGE_ROOM_NAME':
             return {
                 ...state,
-                isRecording: false
+                roomName: action.payload
             }
 
         default:

@@ -6,44 +6,42 @@ import H1 from '../components/H1'
 import Brand from '../components/Brand'
 import Page from '../components/Page'
 
-class CreatePodcast extends React.Component {
+class ListenPodcast extends React.Component {
     render() {
         const {
-            isRecording,
+            isListening,
             roomName,
-            handleStopRecording,
-            handleStartRecording,
-            handleChangeRoomName,
+            handleStopListening,
+            handleStartListening,
         } = this.props
 
         return <article>
-                    <H1>Create your podcast</H1>
+                    <H1>Listening to podcast</H1>
 
                     <div className="create-room">
                         <Input
                             big={true}
                             value={roomName}
-                            onChange={handleChangeRoomName}
                             placeholder="e.g. React Amsterdam"
                             type="text"
                             name="room"
-                            disabled={isRecording}
+                            disabled={true}
                         />
 
                         <span>
 
                         </span>
 
-                        { isRecording
+                        { isListening
                             ?
                             <Button
-                                onClick={handleStopRecording}>
+                                onClick={handleStopListening}>
                                 Stop
                             </Button>
                             :
                             <Button
                                 disabled={!roomName}
-                                onClick={handleStartRecording}>
+                                onClick={handleStartListening}>
                                 Start
                             </Button>
                         }
@@ -69,5 +67,5 @@ class CreatePodcast extends React.Component {
 }
 
 
-export default CreatePodcast
+export default ListenPodcast
 

@@ -1,5 +1,6 @@
 import { injectGlobal } from 'styled-components'
-import Head from './Head'
+import HtmlHead from './HtmlHead'
+import Bg from './Bg'
 
 injectGlobal`
     * {
@@ -15,8 +16,8 @@ injectGlobal`
 `
 
 export default ({ children, title, ...props }) => {
-    return <div {...props}>
-        <Head title={title} />
+    return <Bg {...props}>
+        <HtmlHead title={title} />
         {children}
-    </div>
+    </Bg>
 }
