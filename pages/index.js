@@ -6,11 +6,10 @@ import {
     stopRecording,
 } from '../actions'
 
-import Button from '../components/Button'
-import Input from '../components/Input'
-import H1 from '../components/H1'
 import Brand from '../components/Brand'
 import Page from '../components/Page'
+
+import CreatePodcastContainer from '../components/CreatePodcastContainer'
 
 class Index extends React.Component {
     constructor(props) {
@@ -52,37 +51,7 @@ class Index extends React.Component {
                         <Brand />
                     </header>
 
-                    <article>
-                        <H1>Create your podcast</H1>
-
-                        <div className="create-room">
-                            <Input
-                                big={true}
-                                value={this.state.roomName}
-                                onChange={this.handleChange}
-                                placeholder="e.g. React Amsterdam"
-                                type="text"
-                                name="room"
-                                disabled={isRecording}
-                            />
-
-                            { isRecording
-                                ?
-                                <Button
-                                    onClick={this.handleStopRecording}>
-                                    Stop
-                                </Button>
-                                :
-                                <Button
-                                    disabled={!this.state.roomName}
-                                    onClick={this.handleStartRecording}>
-                                    Start
-                                </Button>
-                            }
-
-                        </div>
-
-                    </article>
+                    <CreatePodcastContainer />
                 </div>
             </div>
 
@@ -102,15 +71,6 @@ class Index extends React.Component {
                 .content {
                     max-width: 1170px;
                     margin: 0 auto;
-                }
-
-                article {
-                    padding: 15px;
-                }
-
-                .create-room :global(button) {
-                    display: block;
-                    margin: 30px auto;
                 }
 
             `}</style>
