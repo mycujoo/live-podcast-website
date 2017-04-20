@@ -7,6 +7,11 @@ import {
     stopRecording,
 } from '../actions'
 
+import {
+    drawBuffer
+} from '../lib/broadcast'
+
+
 import CreatePodcast from './CreatePodcast'
 
 class CreatePodcastContainer extends React.Component {
@@ -34,7 +39,9 @@ class CreatePodcastContainer extends React.Component {
             roomName,
         }).then((client) => {
 
-            broadcast.startBroadcast({ client, roomName }).then(({ recorder, context}) => {
+            const drawInCanvas = (data) => drawBuffer(this.canvas, data)
+
+            broadcast.startBroadcast({ client, roomName, drawBuffer: drawInCanvas }).then(({ recorder, context}) => {
                 dispatch(startRecording(roomName))
 
                 this.client = client
@@ -61,8 +68,11 @@ class CreatePodcastContainer extends React.Component {
             roomName={this.state.roomName}
             handleStartRecording={this.handleStartRecording}
             handleStopRecording={this.handleStopRecording}
-            handleChangeRoomName={this.handleChangeRoomName}
-        />
+            handleChangeRoomName={this.handleChangeRoomName}>
+
+            <canvas ref={(canvas) => this.canvas = canvas }></canvas>
+
+        </CreatePodcast>
     }
 }
 

@@ -13,12 +13,15 @@ class ListenPodcast extends React.Component {
             roomName,
             handleStopListening,
             handleStartListening,
+            children,
         } = this.props
 
         return <article>
                     <H1>Listening to podcast</H1>
 
                     <div className="create-room">
+                        {children}
+
                         <Input
                             big={true}
                             value={roomName}
@@ -50,9 +53,21 @@ class ListenPodcast extends React.Component {
 
                     <style jsx>{`
 
+                        .create-room {
+                            position: relative;
+                        }
+
                         .create-room :global(button) {
                             display: block;
                             margin: 30px auto;
+                        }
+
+                        .create-room :global(canvas) {
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            height: 122px;
+                            width: 50%;
                         }
 
                         article {

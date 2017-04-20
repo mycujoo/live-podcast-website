@@ -8,6 +8,10 @@ import {
     stopListening,
 } from '../actions'
 
+import {
+    drawBuffer
+} from '../lib/broadcast'
+
 import ListenPodcast from './ListenPodcast'
 
 class ListenPodcastContainer extends React.Component {
@@ -19,7 +23,9 @@ class ListenPodcastContainer extends React.Component {
             roomName,
         }).then((client) => {
 
-            broadcast.startListening({ client, roomName }).then((context) => {
+            const drawInCanvas = (data) => drawBuffer(this.canvas, data)
+
+            broadcast.startListening({ client, roomName, drawBuffer: drawInCanvas }).then((context) => {
                 dispatch(startListening(roomName))
 
                 this.client = client
@@ -44,8 +50,10 @@ class ListenPodcastContainer extends React.Component {
             isListening={this.props.isListening}
             roomName={this.props.roomName}
             handleStartListening={this.handleStartListening}
-            handleStopListening={this.handleStopListening}
-        />
+            handleStopListening={this.handleStopListening}>
+
+            <canvas ref={(canvas) => this.canvas = canvas }></canvas>
+        </ListenPodcast>
     }
 }
 

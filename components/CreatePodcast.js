@@ -14,12 +14,15 @@ class CreatePodcast extends React.Component {
             handleStopRecording,
             handleStartRecording,
             handleChangeRoomName,
+            children,
         } = this.props
 
         return <article>
                     <H1>Create your podcast</H1>
 
                     <div className="create-room">
+                        {children}
+
                         <Input
                             big={true}
                             value={roomName}
@@ -52,9 +55,21 @@ class CreatePodcast extends React.Component {
 
                     <style jsx>{`
 
+                        .create-room {
+                            position: relative;
+                        }
+
                         .create-room :global(button) {
                             display: block;
                             margin: 30px auto;
+                        }
+
+                        .create-room :global(canvas) {
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            height: 122px;
+                            width: 50%;
                         }
 
                         article {
