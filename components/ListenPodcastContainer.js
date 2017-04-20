@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 import * as broadcast from '../lib/broadcast'
+import config from '../config'
 
 import {
     startListening,
@@ -19,7 +20,7 @@ class ListenPodcastContainer extends React.Component {
         const { dispatch, roomName } = this.props
 
         broadcast.connect({
-            serverUrl: 'wss://live-commentary-rictorres.c9users.io',
+            serverUrl: `wss://${config.serverHost}`,
             roomName,
         }).then((client) => {
 
@@ -52,7 +53,7 @@ class ListenPodcastContainer extends React.Component {
             handleStartListening={this.handleStartListening}
             handleStopListening={this.handleStopListening}>
 
-            <canvas ref={(canvas) => this.canvas = canvas }></canvas>
+            {this.props.isListening && <canvas ref={(canvas) => this.canvas = canvas }></canvas>}
         </ListenPodcast>
     }
 }

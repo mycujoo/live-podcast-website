@@ -19,4 +19,9 @@ class Index extends React.Component {
     }
 }
 
+Index.getInitialProps = ({ pathname }) => {
+    return { pathname }
+}
+
+
 export default withRedux(initStore)(Index)

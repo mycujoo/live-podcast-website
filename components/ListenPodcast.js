@@ -17,7 +17,7 @@ class ListenPodcast extends React.Component {
         } = this.props
 
         return <article>
-                    <H1>Listening to podcast</H1>
+                    <H1>Listen to podcast</H1>
 
                     <div className="create-room">
                         {children}
@@ -30,10 +30,6 @@ class ListenPodcast extends React.Component {
                             name="room"
                             disabled={true}
                         />
-
-                        <span>
-
-                        </span>
 
                         { isListening
                             ?

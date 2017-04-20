@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as broadcast from '../lib/broadcast'
+import config from '../config'
 
 import {
     startRecording,
@@ -10,7 +11,6 @@ import {
 import {
     drawBuffer
 } from '../lib/broadcast'
-
 
 import CreatePodcast from './CreatePodcast'
 
@@ -35,7 +35,7 @@ class CreatePodcastContainer extends React.Component {
         const { roomName } = this.state
 
         broadcast.connect({
-            serverUrl: 'wss://live-commentary-rictorres.c9users.io',
+            serverUrl: `wss://${config.serverHost}`,
             roomName,
         }).then((client) => {
 
@@ -70,8 +70,7 @@ class CreatePodcastContainer extends React.Component {
             handleStopRecording={this.handleStopRecording}
             handleChangeRoomName={this.handleChangeRoomName}>
 
-            <canvas ref={(canvas) => this.canvas = canvas }></canvas>
-
+            {this.props.isRecording && <canvas ref={(canvas) => this.canvas = canvas }></canvas>}
         </CreatePodcast>
     }
 }

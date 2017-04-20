@@ -5,6 +5,7 @@ import Input from '../components/Input'
 import H1 from '../components/H1'
 import Brand from '../components/Brand'
 import Page from '../components/Page'
+import A from '../components/A'
 
 class CreatePodcast extends React.Component {
     render() {
@@ -16,6 +17,10 @@ class CreatePodcast extends React.Component {
             handleChangeRoomName,
             children,
         } = this.props
+
+        const listenUrl = process.browser
+            ? `${window.location.href}listen?room=${roomName}`
+            : `/listen?room=${roomName}`
 
         return <article>
                     <H1>Create your podcast</H1>
@@ -33,9 +38,10 @@ class CreatePodcast extends React.Component {
                             disabled={isRecording}
                         />
 
-                        <span>
-
-                        </span>
+                        { isRecording
+                            &&
+                            <A target="_blank" href={listenUrl}>{listenUrl}</A>
+                        }
 
                         { isRecording
                             ?
@@ -70,6 +76,11 @@ class CreatePodcast extends React.Component {
                             top: 0;
                             height: 122px;
                             width: 50%;
+                        }
+
+                        .create-room :global(a) {
+                            display: inline-block;
+                            margin-top: 10px;
                         }
 
                         article {
