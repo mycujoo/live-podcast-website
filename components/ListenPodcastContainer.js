@@ -4,28 +4,26 @@ import Router from 'next/router'
 import * as broadcast from '../lib/broadcast'
 
 import {
-    startRecording,
-    stopRecording,
+    startListening,
+    stopListening,
 } from '../actions'
 
 import ListenPodcast from './ListenPodcast'
 
 class ListenPodcastContainer extends React.Component {
     handleStartListening = (e) => {
-        const { dispatch } = this.props
-        const { roomName } = this.state
+        const { dispatch, roomName } = this.props
 
         broadcast.connect({
             serverUrl: 'wss://live-commentary-rictorres.c9users.io',
             roomName,
         }).then((client) => {
 
-            broadcast.startBroadcast({ client }).then(({ recorder, context}) => {
-                dispatch(startRecording(roomName))
+            broadcast.startListening({ client, roomName }).then((context) => {
+                dispatch(startListening(roomName))
 
                 this.client = client
                 this.context = context
-                this.recorder = recorder
             })
         })
 
@@ -35,15 +33,15 @@ class ListenPodcastContainer extends React.Component {
     handleStopListening = (e) => {
         const { dispatch } = this.props
 
-        broadcast.stopBroadcast({ client: this.client, roomName: this.state.roomName })
-        broadcast.disconnect({ client: this.client, recorder: this.recorder })
+        broadcast.stopListening({ client: this.client, roomName: this.props.roomName })
+        broadcast.disconnect({ client: this.client })
 
-        dispatch(stopRecording())
+        dispatch(stopListening())
     }
 
     render() {
         return <ListenPodcast
-            isListening={this.props.isRecording}
+            isListening={this.props.isListening}
             roomName={this.props.roomName}
             handleStartListening={this.handleStartListening}
             handleStopListening={this.handleStopListening}
@@ -53,7 +51,7 @@ class ListenPodcastContainer extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        isRecording: state.isRecording,
+        isListening: state.isListening,
         roomName: state.roomName,
     }
 }

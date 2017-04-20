@@ -34,7 +34,7 @@ class CreatePodcastContainer extends React.Component {
             roomName,
         }).then((client) => {
 
-            broadcast.startBroadcast({ client }).then(({ recorder, context}) => {
+            broadcast.startBroadcast({ client, roomName }).then(({ recorder, context}) => {
                 dispatch(startRecording(roomName))
 
                 this.client = client
