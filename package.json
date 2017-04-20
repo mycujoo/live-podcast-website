@@ -1,8 +1,7 @@
 {
-  "name": "live-podcast",
+  "name": "live-podcast-website",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Live Podcast Demo",
   "scripts": {
     "dev": "next",
     "build": "next build",

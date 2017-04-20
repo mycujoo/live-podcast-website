@@ -10,7 +10,7 @@ import CreatePodcastContainer from '../components/CreatePodcastContainer'
 
 class Index extends React.Component {
     render() {
-        return <Page title="Live Podcast">
+        return <Page title="Create a Live Podcast">
             <Content>
                 <Brand />
                 <CreatePodcastContainer />

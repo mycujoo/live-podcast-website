@@ -15,7 +15,7 @@ class Listen extends React.Component {
     }
 
     render() {
-        return <Page title="Live Podcast">
+        return <Page title="Listen to a Live Podcast">
             <Content>
                 <Brand />
                 <ListenPodcastContainer />
